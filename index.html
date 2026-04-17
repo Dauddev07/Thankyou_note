@@ -988,6 +988,17 @@ function toggleMusic(){
 }
 document.getElementById('music-btn').addEventListener('click', toggleMusic);
 
+(function setupBgMusicRepeat(){
+  const media = document.getElementById('bg-music');
+  if (!media) return;
+  media.loop = true;
+  media.addEventListener('ended', function(){
+    media.currentTime = 0;
+    var p = media.play();
+    if (p && p.catch) p.catch(function(){});
+  });
+})();
+
 // ═══ DISABLE CUSTOM CURSOR ON TOUCH DEVICES ═══
 if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
   document.body.style.cursor = 'auto';
